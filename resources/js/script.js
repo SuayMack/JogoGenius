@@ -3,7 +3,7 @@ let playerOrder = [];// ordem que o player aperta
 let flash;//flashes que irãp aparecer no jogo
 let turn;//pontos
 let good;// verifica se o player está apertando as teclas certas ou erradas - true ou false
-let compTurn;// verifica se foi o player acabou ou se o computador acabou o jogo - boolean - 
+let compTurn;// verifica se foi o player ligou o jogo - boolean - 
 let intervalId;//
 let strict = false;//Verifica se o botão strict está check
 let noise = true;//
@@ -60,35 +60,41 @@ function play() {
   turnCounter.innerHTML = 1;//Escreve no HTML 1 round do jogo
   good = true;
   for (var i = 0; i < 20; i++) {
+    //sortear numeros de 1 a 4 
     order.push(Math.floor(Math.random() * 4) + 1);
   }
   compTurn = true;
 
+  //flash colors intervalo
   intervalId = setInterval(gameTurn, 800);
+
+ console.log(order)
 }
-/*
+
 function gameTurn() {
   on = false;
 
+  //se a "luz" estiver acionada
   if (flash == turn) {
     clearInterval(intervalId);
     compTurn = false;
     clearColor();
     on = true;
   }
-
+  //Quando o computador liga
   if (compTurn) {
     clearColor();
     setTimeout(() => {
-      if (order[flash] == 1) one();
-      if (order[flash] == 2) two();
-      if (order[flash] == 3) three();
-      if (order[flash] == 4) four();
+      if (order[flash] == 1) one();//green
+      if (order[flash] == 2) two();//red
+      if (order[flash] == 3) three();//Yellow
+      if (order[flash] == 4) four();//Blue
       flash++;
     }, 200);
   }
 }
 
+//Função noise - Se fizer barulho
 function one() {
   if (noise) {
     let audio = document.getElementById("clip1");
@@ -125,13 +131,14 @@ function four() {
   bottomRight.style.backgroundColor = "lightskyblue";
 }
 
+//Retorna aos estados originais das cores
 function clearColor() {
   topLeft.style.backgroundColor = "darkgreen";
   topRight.style.backgroundColor = "darkred";
   bottomLeft.style.backgroundColor = "goldenrod";
   bottomRight.style.backgroundColor = "darkblue";
 }
-
+//função para fazer os flashes(cores mais claras)
 function flashColor() {
   topLeft.style.backgroundColor = "lightgreen";
   topRight.style.backgroundColor = "tomato";
@@ -139,10 +146,14 @@ function flashColor() {
   bottomRight.style.backgroundColor = "lightskyblue";
 }
 
+//Ao clicar nas cores:
 topLeft.addEventListener('click', (event) => {
+  //se estiver ligado
   if (on) {
     playerOrder.push(1);
+    //checar se está certo
     check();
+    //Chama a função 1
     one();
     if(!win) {
       setTimeout(() => {
@@ -191,24 +202,34 @@ bottomRight.addEventListener('click', (event) => {
   }
 })
 
+// Inicio função check
 function check() {
+  //se o jogador não apertar a mesma sequencia que o computador der
   if (playerOrder[playerOrder.length - 1] !== order[playerOrder.length - 1])
     good = false;
-
-  if (playerOrder.length == 3 && good) {
+  //se estiver no round 20
+  if (playerOrder.length == 20 && good) {
     winGame();
   }
-
+  //se o jogador errou
   if (good == false) {
+    //chama a função 
     flashColor();
-    turnCounter.innerHTML = "NO!";
+    //escreve no display
+    turnCounter.innerHTML = "Errou!";
     setTimeout(() => {
+      //d/a um tempo e desliga o display
       turnCounter.innerHTML = turn;
+      //retorna as cores ao estado original
       clearColor();
 
+      //se o strict estiver selecionado..
       if (strict) {
+        //repete a função play sempre que errar reinicia       
         play();
+        //se nao estiver selecionado
       } else {
+        //zera tudo
         compTurn = true;
         flash = 0;
         playerOrder = [];
@@ -219,7 +240,7 @@ function check() {
 
     noise = false;
   }
-
+  // Se está ligado for igual a 20(total de fases), e se o jogador ganhou, zera tudo
   if (turn == playerOrder.length && good && !win) {
     turn++;
     playerOrder = [];
@@ -228,13 +249,12 @@ function check() {
     turnCounter.innerHTML = turn;
     intervalId = setInterval(gameTurn, 800);
   }
+}//fim check function
 
-}
-
+//
 function winGame() {
   flashColor();
-  turnCounter.innerHTML = "WIN!";
+  turnCounter.innerHTML = "Venceu";
   on = false;
   win = true;
 }
-*/

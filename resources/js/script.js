@@ -1,24 +1,26 @@
 let order = [];
-let playerOrder = [];
-let flash;
-let turn;
-let good;
-let compTurn;
-let intervalId;
-let strict = false;
-let noise = true;
-let on = false;
+let playerOrder = [];// ordem que o player aperta
+let flash;//flashes que irãp aparecer no jogo
+let turn;//pontos
+let good;// verifica se o player está apertando as teclas certas ou erradas - true ou false
+let compTurn;// verifica se foi o player acabou ou se o computador acabou o jogo - boolean - 
+let intervalId;//
+let strict = false;//Verifica se o botão strict está check
+let noise = true;//
+let on = false;//Verifica se o botão ligar está check
 let win;
 
-const turnCounter = document.querySelector("#turn");
-const topLeft = document.querySelector("#topleft");
-const topRight = document.querySelector("#topright");
-const bottomLeft = document.querySelector("#bottomleft");
-const bottomRight = document.querySelector("#bottomright");
-const strictButton = document.querySelector("#strict");
-const onButton = document.querySelector("#on");
-const startButton = document.querySelector("#start");
+//Pegando a referencia do elemento no js
+const turnCounter = document.querySelector("#turn");//pontos
+const topLeft = document.querySelector("#topleft");//verde
+const topRight = document.querySelector("#topright");//vermelho
+const bottomLeft = document.querySelector("#bottomleft");//amarelo
+const bottomRight = document.querySelector("#bottomright");//azul
+const strictButton = document.querySelector("#strict");//botão strict
+const onButton = document.querySelector("#on");//ligar
+const startButton = document.querySelector("#start");//iniciar
 
+//Verificar quando o botão strict é clicado
 strictButton.addEventListener('click', (event) => {
   if (strictButton.checked == true) {
     strict = true;
@@ -27,6 +29,7 @@ strictButton.addEventListener('click', (event) => {
   }
 });
 
+//Verificar quando o botão inicio é clicado
 onButton.addEventListener('click', (event) => {
   if (onButton.checked == true) {
     on = true;
@@ -34,11 +37,12 @@ onButton.addEventListener('click', (event) => {
   } else {
     on = false;
     turnCounter.innerHTML = "";
-    clearColor();
+    clearColor();// volta as cores ao estado inicial(sem "luzes")
     clearInterval(intervalId);
   }
 });
 
+//Se ligar ou ganhar, joguar
 startButton.addEventListener('click', (event) => {
   if (on || win) {
     play();
@@ -46,13 +50,14 @@ startButton.addEventListener('click', (event) => {
 });
 
 function play() {
+  //Reinicia as variaveis
   win = false;
   order = [];
   playerOrder = [];
   flash = 0;
   intervalId = 0;
-  turn = 1;
-  turnCounter.innerHTML = 1;
+  turn = 1;//Primeiro round do jogo
+  turnCounter.innerHTML = 1;//Escreve no HTML 1 round do jogo
   good = true;
   for (var i = 0; i < 20; i++) {
     order.push(Math.floor(Math.random() * 4) + 1);
@@ -61,7 +66,7 @@ function play() {
 
   intervalId = setInterval(gameTurn, 800);
 }
-
+/*
 function gameTurn() {
   on = false;
 
@@ -232,6 +237,4 @@ function winGame() {
   on = false;
   win = true;
 }
-
-
-
+*/

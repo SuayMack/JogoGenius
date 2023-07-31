@@ -16,5 +16,5 @@ Este projeto é um jogo conhecido como Gênius ou Simon(E. U. A).
 ![paginas_web](https://github.com/SuayMack/JogoGenius/blob/master/resources/img/img-git.png) 
 
 ## Referência:
-![github]: [https://github.com/beaucarnes/simon-game](https://github.com/beaucarnes/simon-game)
-![youtube]: [https://www.youtube.com/watch?v=n_ec3eowFLQ](https://www.youtube.com/watch?v=n_ec3eowFLQ)
+- GitHub: [https://github.com/beaucarnes/simon-game](https://github.com/beaucarnes/simon-game)
+- YouTube: [https://www.youtube.com/watch?v=n_ec3eowFLQ](https://www.youtube.com/watch?v=n_ec3eowFLQ)

@@ -4,6 +4,9 @@
 
 Este projeto é um jogo conhecido como Gênius ou Simon(E. U. A).
 
+Teste
+[AQUI](https://suaymack.github.io/JogoGenius/)
+
 ## Tecnologias Utilizadas:
 
 * VSCode
